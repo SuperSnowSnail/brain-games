@@ -3,8 +3,9 @@ import readlineSync from 'readline-sync';
 export const numberOfGames = 3;
 
 export const numberGenerator = () => {
+  const minNumber = 1;
   const maxNumber = 20;
-  return Math.floor(Math.random() * maxNumber);
+  return Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
 };
 
 const gameEngine = (questions, rightAnswers, gameCondition) => {

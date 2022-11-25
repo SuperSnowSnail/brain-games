@@ -16,3 +16,9 @@ Demo:
 Calculate given expression tree times in a row to win!
 Demo:
 [![asciicast](https://asciinema.org/a/YGxz6s0uyqSdUErYbSmfQ24E5.svg)](https://asciinema.org/a/YGxz6s0uyqSdUErYbSmfQ24E5)
+
+#### Brain GCD:
+
+Find the Greatest Common Divider of two numbers tree times in a row to win!
+Demo:
+[![asciicast](https://asciinema.org/a/qWlMhn3Y2pbPL4HOAvUm4Csjd.svg)](https://asciinema.org/a/qWlMhn3Y2pbPL4HOAvUm4Csjd)
