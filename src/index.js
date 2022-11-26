@@ -4,11 +4,11 @@ const numberOfGames = 3;
 
 export const randomNumberFromRange = (min, max) => Math.round(Math.random() * (max - min) + min);
 
-export const arrayGenerator = (coreFunction, ...additionalParams) => {
+export const arrayGenerator = (coreFunction, additionalParam) => {
   const result = [];
 
   for (let i = 0; i < numberOfGames; i += 1) {
-    result.push(coreFunction(i, ...additionalParams));
+    result.push(coreFunction(i, additionalParam));
   }
 
   return result;
