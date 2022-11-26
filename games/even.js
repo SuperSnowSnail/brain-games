@@ -9,9 +9,9 @@ const questionFunction = () => randomNumberFromRange(1, 100);
 
 const answerFunction = (i, questions) => {
   if (isEven(questions[i])) {
-    return 'yes';
+    return positiveAns;
   }
-  return 'no';
+  return negativeAns;
 };
 
 const evenGame = () => {

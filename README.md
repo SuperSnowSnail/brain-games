@@ -30,3 +30,9 @@ Demo:
 Find missing number in the progression.
 Demo:
 [![asciicast](https://asciinema.org/a/fZVaNkr3F9VT1QdeW3KO7iarj.svg)](https://asciinema.org/a/fZVaNkr3F9VT1QdeW3KO7iarj)
+
+#### Brain Prime:
+
+Identify if the given number is prime.
+Demo:
+[![asciicast](https://asciinema.org/a/dvg8ozFJfNPB1k7YaJZMTbuV2.svg)](https://asciinema.org/a/dvg8ozFJfNPB1k7YaJZMTbuV2)
