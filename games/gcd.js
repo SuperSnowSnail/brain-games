@@ -1,4 +1,4 @@
-import gameEngine, { numberOfGames, numberGenerator } from '../src/index.js';
+import gameEngine, { numberOfGames, randomNumberFromRange } from '../src/index.js';
 
 const gameCondition = 'Find the greatest common divisor of given numbers.';
 
@@ -6,8 +6,8 @@ const questionsGenerator = () => {
   const questions = [];
 
   for (let i = 0; i < numberOfGames; i += 1) {
-    const firstNumber = numberGenerator();
-    const secondNumber = numberGenerator();
+    const firstNumber = randomNumberFromRange(1, 20);
+    const secondNumber = randomNumberFromRange(1, 20);
     questions[i] = `${firstNumber} ${secondNumber}`;
   }
 

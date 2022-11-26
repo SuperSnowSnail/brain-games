@@ -1,4 +1,4 @@
-import gameEngine, { numberOfGames, numberGenerator } from '../src/index.js';
+import gameEngine, { numberOfGames, randomNumberFromRange } from '../src/index.js';
 
 const isEven = (number) => number % 2 === 0;
 const positiveAns = 'yes';
@@ -9,7 +9,7 @@ const questionsGenerator = () => {
   const questions = [];
 
   for (let i = 0; i < numberOfGames; i += 1) {
-    questions[i] = numberGenerator();
+    questions[i] = randomNumberFromRange(1, 100);
   }
 
   return questions;

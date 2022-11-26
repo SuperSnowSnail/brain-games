@@ -2,11 +2,7 @@ import readlineSync from 'readline-sync';
 
 export const numberOfGames = 3;
 
-export const numberGenerator = () => {
-  const minNumber = 1;
-  const maxNumber = 20;
-  return Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
-};
+export const randomNumberFromRange = (min, max) => Math.round(Math.random() * (max - min) + min);
 
 const gameEngine = (questions, rightAnswers, gameCondition) => {
   console.log('Welcome to the Brain Games!');
