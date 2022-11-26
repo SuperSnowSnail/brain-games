@@ -1,42 +1,30 @@
-import gameEngine, { numberOfGames, randomNumberFromRange } from '../src/index.js';
+import gameEngine, { arrayGenerator, randomNumberFromRange } from '../src/index.js';
 
 const gameCondition = 'Find the greatest common divisor of given numbers.';
 
-const questionsGenerator = () => {
-  const questions = [];
-
-  for (let i = 0; i < numberOfGames; i += 1) {
-    const firstNumber = randomNumberFromRange(1, 20);
-    const secondNumber = randomNumberFromRange(1, 20);
-    questions[i] = `${firstNumber} ${secondNumber}`;
-  }
-
-  return questions;
+const questionFunction = () => {
+  const firstNumber = randomNumberFromRange(1, 20);
+  const secondNumber = randomNumberFromRange(1, 20);
+  return `${firstNumber} ${secondNumber}`;
 };
 
-const answersGenerator = (questions) => {
-  const answers = [];
-
-  for (let i = 0; i < numberOfGames; i += 1) {
-    const question = questions[i].split(' ');
-    let firstNumber = Number(question[0]);
-    let secondNumber = Number(question[1]);
-    while (firstNumber !== secondNumber) {
-      if (firstNumber > secondNumber) {
-        firstNumber -= secondNumber;
-      } else {
-        secondNumber -= firstNumber;
-      }
+const answerFunction = (i, questions) => {
+  const question = questions[i].split(' ');
+  let firstNumber = Number(question[0]);
+  let secondNumber = Number(question[1]);
+  while (firstNumber !== secondNumber) {
+    if (firstNumber > secondNumber) {
+      firstNumber -= secondNumber;
+    } else {
+      secondNumber -= firstNumber;
     }
-    answers[i] = String(firstNumber);
   }
-
-  return answers;
+  return String(firstNumber);
 };
 
 const gcdGame = () => {
-  const questions = questionsGenerator();
-  const rightAnswers = answersGenerator(questions);
+  const questions = arrayGenerator(questionFunction);
+  const rightAnswers = arrayGenerator(answerFunction, questions);
   gameEngine(questions, rightAnswers, gameCondition);
 };
 

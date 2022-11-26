@@ -1,83 +1,53 @@
-import gameEngine, { numberOfGames, randomNumberFromRange } from '../src/index.js';
+import gameEngine, { arrayGenerator, randomNumberFromRange } from '../src/index.js';
 
 const gameCondition = 'What number is missing in the progression?';
-const progressionLengthGenerator = () => {
-  const progressionLengths = [];
 
-  for (let i = 0; i < numberOfGames; i += 1) {
-    progressionLengths[i] = randomNumberFromRange(5, 10);
-  }
+const progressionLengthFunction = () => randomNumberFromRange(5, 10);
+const progressionLengths = arrayGenerator(progressionLengthFunction);
 
-  return progressionLengths;
+const missingIndexFunction = (i) => {
+  const progressionLength = progressionLengths[i];
+  return randomNumberFromRange(0, progressionLength - 1);
 };
-const progressionLengths = progressionLengthGenerator();
+const missingIndexes = arrayGenerator(missingIndexFunction);
 
-const missingIndexGenerator = () => {
-  const missingIndexes = [];
+const progressionStepFunction = () => randomNumberFromRange(1, 10);
+const progressionSteps = arrayGenerator(progressionStepFunction);
 
-  for (let i = 0; i < numberOfGames; i += 1) {
-    const progressionLength = progressionLengths[i];
-    missingIndexes[i] = randomNumberFromRange(0, progressionLength - 1);
-  }
-
-  return missingIndexes;
-};
-const progressionStepGenerator = () => {
-  const progressionSteps = [];
-
-  for (let i = 0; i < numberOfGames; i += 1) {
-    progressionSteps[i] = randomNumberFromRange(1, 10);
-  }
-
-  return progressionSteps;
-};
-const progressionSteps = progressionStepGenerator();
-const missingIndexes = missingIndexGenerator();
-
-const questionsGenerator = () => {
-  const questions = [];
-
-  for (let i = 0; i < numberOfGames; i += 1) {
-    const progressionStep = progressionSteps[i];
-    const missingIndex = missingIndexes[i];
-    const progressionLength = progressionLengths[i];
-    let numberInProgression = randomNumberFromRange(1, 20);
-    let question = '';
-    for (let j = 0; j < progressionLength; j += 1) {
-      if (j === missingIndex) {
-        question = `${question} ..`;
-      } else {
-        question = `${question} ${numberInProgression}`;
-      }
-
-      numberInProgression += progressionStep;
-    }
-    questions[i] = question.trim();
-  }
-  return questions;
-};
-
-const answersGenerator = (questions) => {
-  const answers = [];
-
-  for (let i = 0; i < numberOfGames; i += 1) {
-    const question = questions[i].split(' ');
-    const progressionStep = progressionSteps[i];
-    const missingIndex = missingIndexes[i];
-    let answer = 0;
-    if (missingIndex === 0) {
-      answer = Number(question[1]) - progressionStep;
+const questionFunction = (i) => {
+  const progressionStep = progressionSteps[i];
+  const missingIndex = missingIndexes[i];
+  const progressionLength = progressionLengths[i];
+  let numberInProgression = randomNumberFromRange(1, 20);
+  let question = '';
+  for (let j = 0; j < progressionLength; j += 1) {
+    if (j === missingIndex) {
+      question = `${question} ..`;
     } else {
-      answer = Number(question[missingIndex - 1]) + progressionStep;
+      question = `${question} ${numberInProgression}`;
     }
-    answers[i] = String(answer);
+
+    numberInProgression += progressionStep;
   }
-  return answers;
+  return question.trim();
+};
+
+const answerFunction = (i, questions) => {
+  const question = questions[i].split(' ');
+  const progressionStep = progressionSteps[i];
+  const missingIndex = missingIndexes[i];
+  let answer = 0;
+  if (missingIndex === 0) {
+    answer = Number(question[1]) - progressionStep;
+  } else {
+    answer = Number(question[missingIndex - 1]) + progressionStep;
+  }
+  return String(answer);
 };
 
 const progressionGame = () => {
-  const questions = questionsGenerator();
-  const rightAnswers = answersGenerator(questions);
+  const questions = arrayGenerator(questionFunction);
+  const rightAnswers = arrayGenerator(answerFunction, questions);
   gameEngine(questions, rightAnswers, gameCondition);
 };
 
