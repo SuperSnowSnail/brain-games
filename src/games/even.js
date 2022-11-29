@@ -1,4 +1,5 @@
-import gameEngine, { arrayGenerator, randomNumberFromRange } from '../src/index.js';
+import gameEngine from '../index.js';
+import { arrayGenerator, randomNumberFromRange } from '../utils.js';
 
 const isEven = (number) => number % 2 === 0;
 const positiveAns = 'yes';

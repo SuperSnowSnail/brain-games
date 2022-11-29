@@ -1,8 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/SuperSnowSnail/frontend-project-44/workflows/hexlet-check/badge.svg)](https://github.com/SuperSnowSnail/frontend-project-44/actions)",
-  "main": "./src/index.js",
+  "description": "Brain Games: Test your mental calculation skills with this five math games!",
   "type": "module",
   "bin": {
     "brain-games": "bin/brain-games.js",

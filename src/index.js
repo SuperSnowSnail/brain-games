@@ -1,18 +1,6 @@
 import readlineSync from 'readline-sync';
 
-const numberOfGames = 3;
-
-export const randomNumberFromRange = (min, max) => Math.round(Math.random() * (max - min) + min);
-
-export const arrayGenerator = (coreFunction, additionalParam) => {
-  const result = [];
-
-  for (let i = 0; i < numberOfGames; i += 1) {
-    result.push(coreFunction(i, additionalParam));
-  }
-
-  return result;
-};
+export const numberOfGames = 3;
 
 const gameEngine = (questions, rightAnswers, gameCondition) => {
   console.log('Welcome to the Brain Games!');
