@@ -5,7 +5,8 @@ const gameDescription = 'What is the result of the expression?';
 
 const getMathOperator = () => {
   const operators = ['+', '-', '*'];
-  return operators[getRandomNumInRange(0, operators.length - 1)];
+  const randomIndex = getRandomNumInRange(0, operators.length - 1);
+  return operators[randomIndex];
 };
 
 const calculate = (firstNum, secondNum, operator) => {
