@@ -1,24 +1,26 @@
-import gameEngine from '../index.js';
-import { arrayGenerator, randomNumberFromRange } from '../utils.js';
+import runGameEngine from '../index.js';
+import getRandomNumInRange from '../utils.js';
 
 const isEven = (number) => number % 2 === 0;
 const positiveAns = 'yes';
 const negativeAns = 'no';
-const gameCondition = `Answer "${positiveAns}" if the number is even, otherwise answer "${negativeAns}".`;
+const gameDescription = `Answer "${positiveAns}" if the number is even, otherwise answer "${negativeAns}".`;
 
-const questionFunction = () => randomNumberFromRange(1, 100);
-
-const answerFunction = (i, questions) => {
-  if (isEven(questions[i])) {
+const getEvenAnswer = (number) => {
+  if (isEven(number)) {
     return positiveAns;
   }
   return negativeAns;
 };
 
-const evenGame = () => {
-  const questions = arrayGenerator(questionFunction);
-  const rightAnswers = arrayGenerator(answerFunction, questions);
-  gameEngine(questions, rightAnswers, gameCondition);
+const generateRound = () => {
+  const number = getRandomNumInRange(1, 100);
+  const question = `${number}`;
+  const answer = getEvenAnswer(number);
+
+  return [question, answer];
 };
 
-export default evenGame;
+export default () => {
+  runGameEngine(gameDescription, generateRound);
+};
