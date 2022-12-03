@@ -1,55 +1,38 @@
-import gameEngine from '../index.js';
-import { arrayGenerator, randomNumberFromRange } from '../utils.js';
+import runGameEngine from '../index.js';
+import getRandomNumInRange from '../utils.js';
 
-const gameCondition = 'What number is missing in the progression?';
+const gameDescription = 'What number is missing in the progression?';
 
-const progressionLengthFunction = () => randomNumberFromRange(5, 10);
-const progressionLengths = arrayGenerator(progressionLengthFunction);
+const getCurrentPart = (answer, numInProgression) => {
+  if (answer === numInProgression) {
+    return '..';
+  }
 
-const missingIndexFunction = (i) => {
-  const progressionLength = progressionLengths[i];
-  return randomNumberFromRange(0, progressionLength - 1);
+  return `${numInProgression}`;
 };
-const missingIndexes = arrayGenerator(missingIndexFunction);
 
-const progressionStepFunction = () => randomNumberFromRange(1, 10);
-const progressionSteps = arrayGenerator(progressionStepFunction);
+const calculateMissing = (startNum, i, progressionStep) => startNum + i * progressionStep;
 
-const questionFunction = (i) => {
-  const progressionStep = progressionSteps[i];
-  const missingIndex = missingIndexes[i];
-  const progressionLength = progressionLengths[i];
-  let numberInProgression = randomNumberFromRange(1, 20);
+const generateRound = () => {
+  const progressionLength = getRandomNumInRange(5, 10);
+  const missingIndex = getRandomNumInRange(0, progressionLength - 1);
+  const progressionStep = getRandomNumInRange(1, 10);
+  const startNum = getRandomNumInRange(1, 20);
+
+  const answer = calculateMissing(startNum, missingIndex, progressionStep);
   let question = '';
-  for (let j = 0; j < progressionLength; j += 1) {
-    if (j === missingIndex) {
-      question = `${question} ..`;
-    } else {
-      question = `${question} ${numberInProgression}`;
-    }
-
-    numberInProgression += progressionStep;
+  let numInProgression = startNum;
+  for (let i = 0; i < progressionLength; i += 1) {
+    const currentPart = getCurrentPart(answer, numInProgression);
+    question = `${question} ${currentPart}`;
+    numInProgression += progressionStep;
   }
-  return question.trim();
+
+  question = question.trim();
+
+  return [question, answer];
 };
 
-const answerFunction = (i, questions) => {
-  const question = questions[i].split(' ');
-  const progressionStep = progressionSteps[i];
-  const missingIndex = missingIndexes[i];
-  let answer = 0;
-  if (missingIndex === 0) {
-    answer = Number(question[1]) - progressionStep;
-  } else {
-    answer = Number(question[missingIndex - 1]) + progressionStep;
-  }
-  return String(answer);
+export default () => {
+  runGameEngine(gameDescription, generateRound);
 };
-
-const progressionGame = () => {
-  const questions = arrayGenerator(questionFunction);
-  const rightAnswers = arrayGenerator(answerFunction, questions);
-  gameEngine(questions, rightAnswers, gameCondition);
-};
-
-export default progressionGame;

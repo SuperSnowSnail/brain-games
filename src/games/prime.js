@@ -1,5 +1,5 @@
-import gameEngine from '../index.js';
-import { arrayGenerator, randomNumberFromRange } from '../utils.js';
+import runGameEngine from '../index.js';
+import getRandomNumInRange from '../utils.js';
 
 const isPrime = (number) => {
   if (number <= 1) {
@@ -16,21 +16,23 @@ const isPrime = (number) => {
 };
 const positiveAns = 'yes';
 const negativeAns = 'no';
-const gameCondition = `Answer "${positiveAns}" if given number is prime. Otherwise answer "${negativeAns}".`;
+const gameDescription = `Answer "${positiveAns}" if given number is prime. Otherwise answer "${negativeAns}".`;
 
-const questionFunction = () => randomNumberFromRange(2, 30);
-
-const answerFunction = (i, questions) => {
-  if (isPrime(questions[i])) {
+const getAnswerWord = (number) => {
+  if (isPrime(number)) {
     return positiveAns;
   }
   return negativeAns;
 };
 
-const primeGame = () => {
-  const questions = arrayGenerator(questionFunction);
-  const rightAnswers = arrayGenerator(answerFunction, questions);
-  gameEngine(questions, rightAnswers, gameCondition);
+const generateRound = () => {
+  const number = getRandomNumInRange(2, 30);
+  const question = `${number}`;
+  const answer = getAnswerWord(number);
+
+  return [question, answer];
 };
 
-export default primeGame;
+export default () => {
+  runGameEngine(gameDescription, generateRound);
+};

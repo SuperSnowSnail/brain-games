@@ -1,52 +1,46 @@
-import gameEngine from '../index.js';
-import { arrayGenerator, randomNumberFromRange } from '../utils.js';
+import runGameEngine from '../index.js';
+import getRandomNumInRange from '../utils.js';
 
-const gameCondition = 'What is the result of the expression?';
+const gameDescription = 'What is the result of the expression?';
 
-const mathSymbolGenerator = () => {
-  const numberOfOptions = 3;
-  const symbols = ['+', '-', '*'];
-  const randomSymbolIndex = Math.floor(Math.random() * numberOfOptions);
-  return symbols[randomSymbolIndex];
+const getMathOperator = () => {
+  const operators = ['+', '-', '*'];
+  const randomIndex = getRandomNumInRange(0, operators.length - 1);
+  return operators[randomIndex];
 };
 
-const questionFunction = () => {
-  let firstNumber = 0;
-  let secondNumber = 0;
-  const mathSymbol = mathSymbolGenerator();
-  if (mathSymbol === '*') {
-    firstNumber = randomNumberFromRange(1, 12);
-    secondNumber = randomNumberFromRange(1, 12);
-  } else {
-    firstNumber = randomNumberFromRange(1, 100);
-    secondNumber = randomNumberFromRange(1, 100);
-  }
-  const questionArray = [firstNumber, mathSymbol, secondNumber];
-
-  return questionArray.join(' ');
-};
-
-const answerFunction = (i, questions) => {
-  const question = questions[i].split(' ');
-  const firstNumber = Number(question[0]);
-  const secondNumber = Number(question[2]);
-  const mathSymbol = question[1];
-  switch (mathSymbol) {
+const calculate = (firstNum, secondNum, operator) => {
+  switch (operator) {
     case '+':
-      return String(firstNumber + secondNumber);
+      return firstNum + secondNum;
     case '-':
-      return String(firstNumber - secondNumber);
+      return firstNum - secondNum;
     case '*':
-      return String(firstNumber * secondNumber);
+      return firstNum * secondNum;
     default:
       return 'Unexpected Value!';
   }
 };
 
-const calcGame = () => {
-  const questions = arrayGenerator(questionFunction);
-  const rightAnswers = arrayGenerator(answerFunction, questions);
-  gameEngine(questions, rightAnswers, gameCondition);
+const generateRound = () => {
+  let firstNum = 0;
+  let secondNum = 0;
+  const operator = getMathOperator();
+
+  if (operator === '*') {
+    firstNum = getRandomNumInRange(1, 12);
+    secondNum = getRandomNumInRange(1, 12);
+  } else {
+    firstNum = getRandomNumInRange(1, 100);
+    secondNum = getRandomNumInRange(1, 100);
+  }
+
+  const question = `${firstNum} ${operator} ${secondNum}`;
+  const answer = calculate(firstNum, secondNum, operator);
+
+  return [question, answer];
 };
 
-export default calcGame;
+export default () => {
+  runGameEngine(gameDescription, generateRound);
+};
