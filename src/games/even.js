@@ -6,7 +6,7 @@ const positiveAns = 'yes';
 const negativeAns = 'no';
 const gameDescription = `Answer "${positiveAns}" if the number is even, otherwise answer "${negativeAns}".`;
 
-const getEvenAnswer = (number) => {
+const getAnswerWord = (number) => {
   if (isEven(number)) {
     return positiveAns;
   }
@@ -16,7 +16,7 @@ const getEvenAnswer = (number) => {
 const generateRound = () => {
   const number = getRandomNumInRange(1, 100);
   const question = `${number}`;
-  const answer = getEvenAnswer(number);
+  const answer = getAnswerWord(number);
 
   return [question, answer];
 };
