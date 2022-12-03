@@ -30,7 +30,6 @@ const generateRound = () => {
 
   const question = String(num);
   const answer = getPrimeAnswerWord(num);
-
   return [question, answer];
 };
 
