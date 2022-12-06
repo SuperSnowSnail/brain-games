@@ -18,7 +18,7 @@ const calculate = (firstNum, secondNum, operator) => {
     case '*':
       return firstNum * secondNum;
     default:
-      return 'Unexpected Value!';
+      throw new Error(`Unexpected operator '${operator}'`);
   }
 };
 

@@ -14,22 +14,14 @@ const isPrime = (number) => {
 
   return true;
 };
-const positiveAns = 'yes';
-const negativeAns = 'no';
-const gameDescription = `Answer "${positiveAns}" if given number is prime. Otherwise answer "${negativeAns}".`;
 
-const getPrimeAnswerWord = (number) => {
-  if (isPrime(number)) {
-    return positiveAns;
-  }
-  return negativeAns;
-};
+const gameDescription = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 const generateRound = () => {
   const num = getRandomNumInRange(2, 30);
-
   const question = String(num);
-  const answer = getPrimeAnswerWord(num);
+  const answer = isPrime(num) ? 'yes' : 'no';
+
   return [question, answer];
 };
 
