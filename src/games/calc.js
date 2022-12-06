@@ -9,7 +9,7 @@ const getMathOperator = () => {
   return operators[randomIndex];
 };
 
-const calculate = (firstNum, secondNum, operator) => {
+const calculateExpression = (firstNum, secondNum, operator) => {
   switch (operator) {
     case '+':
       return firstNum + secondNum;
@@ -23,20 +23,12 @@ const calculate = (firstNum, secondNum, operator) => {
 };
 
 const generateRound = () => {
-  let firstNum = 0;
-  let secondNum = 0;
+  const firstNum = getRandomNumInRange(1, 25);
+  const secondNum = getRandomNumInRange(1, 25);
   const operator = getMathOperator();
 
-  if (operator === '*') {
-    firstNum = getRandomNumInRange(1, 12);
-    secondNum = getRandomNumInRange(1, 12);
-  } else {
-    firstNum = getRandomNumInRange(1, 100);
-    secondNum = getRandomNumInRange(1, 100);
-  }
-
   const question = `${firstNum} ${operator} ${secondNum}`;
-  const answer = calculate(firstNum, secondNum, operator);
+  const answer = calculateExpression(firstNum, secondNum, operator);
 
   return [question, answer];
 };
